@@ -35,8 +35,16 @@
     step 2 : Make Components -> Header, Form and Footer Components (function or class based components).
         - creating functional components
             `Header.js`
-                ```javascript
-                import react form 'React'
+                ```
+                `import react form 'React'
+
+                const Header = () => {
+                    return (
+                        <div>
+                            My Header
+                        </div>
+                    );
+                }`
                  
 
 

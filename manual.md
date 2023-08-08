@@ -7,8 +7,8 @@
 - Basic commands to create app
     a. npx create-react-app my-app -> it will create folder `my-app` where all front-end code exist. (if create react app   not a command) then install -> npm install -g create-react-app : this will install it globally (for first time only)
     b. cd my-app
-    c. npm start -> to start the development server only for development. ( In production build file that do not need any server to start fornt-end )
-    d. opt. vs code extension : [Source](https://www.syncfusion.com/blogs/post/7-vs-code-extensions-for-react-developers.aspx)
+    c. npm start -> to start the development server only for development. ( In production build file that do not need any server to start fornt-end)
+    d. optional vs code extension : [Source](https://www.syncfusion.com/blogs/post/7-vs-code-extensions-for-react-developers.aspx)
 
 ## 3. Folder Structure
     ![Folder Structure](folder-structure.png)

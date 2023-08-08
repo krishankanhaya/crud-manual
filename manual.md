@@ -12,7 +12,7 @@
 
 ## 3. Folder Structure
     ![Folder Structure](folder-structure.png)
-    #Explaination
+    #Explanation
         - node_modules : all the packages we downloads through npm is stored locally here let it be there.
         - public : title, metadata, fab-icon and root element is stored here. That we get in `index.js` and render here App.js   robots.txt is just for google crawling for seo let it be.
         - src : This is main folder > we have to work on we cannot access any file or media outside this folder
@@ -32,19 +32,50 @@
 
 ## 5. Splitting UI into components
     step 1 : Make `Components` directory under `src` directory.
-    step 2 : Make Components -> Header, Form and Footer Components (function or class based components).
+    step 2 : Make Components -> Header, Registration Form and Footer Components (function or class based components).
         - creating functional components
-            `Header.js`
-                ```
-                `import react form 'React'
+            `Header.js` first latter is in uppercase (recommended)
+            
+                import react form 'React'
+                import './Header.css'
 
-                `const Header = () => {
+                const Header = () => {
                     return (
                         <div>
                             My Header
                         </div>
                     );
-                }`
+                }
+        - Repeat these step to create `Footer.js`
+        - `RegisterForm.js`
+            
+            import React from 'react'
+
+            import "./RegisterForm.css";
+
+            function RegisterForm() {
+                const handleSubmit = (e) => { // this function handle form submission and prevent default form submission
+                    e.preventDefault();
+                    console.log('form is handled.')
+                    // now we connect to backend and send form data to backend.
+                }
+            return (
+                <form onSubmit={handleSubmit} className='form'>
+                <div>  
+                    <label htmlFor="name">Username : </label>
+                    <input type="text" name="name" placeholder="Full Name" required/>
+                </div>
+                <div>
+                <label htmlFor="email">Email : </label>
+                <input type="email" name="email" placeholder="example@example.com" required/>
+                </div>
+                <input type='submit' placeholder='Register'/>
+                </form>
+            );
+            }
+
+            export default RegisterForm
+
                  
 
 

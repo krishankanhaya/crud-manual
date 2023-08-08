@@ -1,0 +1,11 @@
+.form{
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 2rem 4rem;
+}
+.form > div {
+    margin-bottom: 2rem;
+}
+.form > div:nth-child(2){
+    margin-left: 1.5rem;
+}

@@ -4,7 +4,7 @@
     - Check npm version : type in system cmd -> npm --version
 
 ## 2. Creating React app
-- Basic commands to create app
+    - Basic commands to create app
     -a. npx create-react-app my-app -> it will create folder `my-app` where all front-end code exist. (if create react app   not a command) then install -> npm install -g create-react-app : this will install it globally (for first time only)
     -b. cd my-app
     -c. npm start -> to start the development server only for development. ( In production build file that do not need any server to start fornt-end)

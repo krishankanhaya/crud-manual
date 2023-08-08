@@ -30,4 +30,17 @@
     2. In `src/index.css` and `src/app.css` remove styling.
     3. In `src/App.js` remove dummy jsx and add jsx (html + js) that is visible on the screen;
 
+## 5. Splitting UI into components
+    step 1 : Make `Components` directory under `src` directory.
+    step 2 : Make Components -> Header, Form and Footer Components (function or class based components).
+        - creating functional components
+            `Header.js`
+                <pre>
+                ```
+                import react form 'React'
+                
+                ```
+                </pre>
+
+
 

@@ -38,7 +38,7 @@
                 ```
                 `import react form 'React'
 
-                const Header = () => {
+                `const Header = () => {
                     return (
                         <div>
                             My Header

@@ -1,3 +1,4 @@
+### Part - 1 . Front-End ###
 ## 1. Download & Install latest version of node with default settings. [Node-Download](https://nodejs.org/en/download)
     - Check node is installed correctly or not : type in system cmd -> node --version
     - npm ( node package manager ) it is automatically downloaded with node this will help in downloading and managing packages.
@@ -75,6 +76,54 @@
             }
 
             export default RegisterForm
+
+## 6. Storing User Registration Data and Making an API call to backend
+    - we store user data in object by using `state` of react
+    step 1 : create empty state
+            // initializing state with empty object that contain name and email field
+            // registrationData -> object that store data, setRegistrationData -> method that is used to update data
+            
+            const [registrationData, setRegistrationData] = useState({
+            name: "",
+            email: "",
+            });
+    step 2 : Update input element : name and email
+            <input
+                type="text"
+                name="name"
+                placeholder="Full Name"
+                onChange={handleInputChange} // as we type any character in input field  `handleInputChange` function is called and value is updated
+                required
+            />
+    
+    step 3 : This is handle change method
+            const handleInputChange = (e) => {
+                const { name, value } = e.target;
+                setRegistrationData((prevPerson) => ({
+                    ...prevPerson,
+                    [name]: value,
+                }));
+            };
+
+    step 4 : Making Http request to server and sending data to backend
+            - first we have to install axios (npm install axios) in application root `.../my-app>npm install axios` -> to make http request
+            - now import axios on top of RegisterForm.js -> import axios from 'axios'
+            - below code is to make http request and send data to server after preventing default form submission
+            - explanation -> backend server is running on `ttp://localhost:5000` and all api routing is handled by `/api` route and `/register` is that end point we are making request handle our request
+            const res = await axios
+            .post("http://localhost:5000/api/register", {
+                name: registrationData.name,
+                email: registrationData.email,
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+            console.log(res)
+    Final : Now front end send data successfully and backend will do the rest and after handling request at backend we got a response that is sent by the backend and depending upon response we update our ui.
+    
+<--- Frond end Completed --->
+
+    
 
                  
 

@@ -120,8 +120,8 @@
             });
             console.log(res)
     Final : Now front end send data successfully and backend will do the rest and after handling request at backend we got a response that is sent by the backend and depending upon response we update our ui.
-    
-<--- Frond end Completed --->
+
+<--- Front-End Completed --->
 
     
 

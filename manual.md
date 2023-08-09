@@ -123,6 +123,136 @@
 
 <--- Front-End Completed --->
 
+<--- Back-End Start --->
+
+## 1. Creating Simple Node Server
+    step 1 : Create `server` directory at same level of `my-app` and make basic foler structure
+            |---server--
+                       |---models (this holds all the models or schema)
+                       |---routes (all api routing are route through here)
+                       |---controllers (here all controller functions is declared)
+                       ---index.js (starting file of backend)
+    
+    step 2 : now we install express : it used to communicate client browser with backend , api routing, make communication on two port and sending response back to client.
+            - command -> npm install express
+            - following code will use to start the server
+                const express = require('express')
+                const app = express();
+
+                app.listen(5000, ()=> {
+                    console.log("server is running on 5000 port.")
+                    
+                })
+            - now replace test script in package.json as `"start" : "node index.js"`
+            - now backend server -> cd backend and then ->npm start 
+            - now go to loacalhost:5000 in browser where you see your console message.
+            - now we work with api and connect our front-end with back-end in next step.
+    step 4 : Flow of connection between front-end and back-end
+            - there is many different approach but this is suitable to me that i explained below.
+            - first you have to create account on mongodb atlas and create cluster and get your connection string [In one min](https://www.youtube.com/shorts/pIHvoXkwmq4)
+
+            -now we install three dependencies (mongoose, cors, cookie-parser)
+            - mongoose -> it is used to make connect, create schema and all kind of query into database
+            - cors -> cross origin resource sharing or making connection between two port or browser.
+            - cookie-parser -> it is used to share object we send with request object but in recent update is not mandatory.
+            - commands -> npm install mongoose cors cookie-parser
+
+            - now require or import all this in index.js as :
+                -const mongoose = require("mongoose");
+                -const cookieParser = require("cookie-parser");
+                -const cors = require("cors");
+
+            - now set credential and origin for cors as `app.use(cors({ credentials: true, origin: "http://localhost:3000" }));` just after creating app constant.
+
+            - now just after that use middleware cookie-parser as:
+                -app.use(cookieParser());
+                -app.use(express.json());
+
+            - as we do our post request at url : http://localhost:5000/api/register -> api is used to categorize different different route or multiple api1, api2 for different different versioning of api and at the end `register` is the end point where it get it controller or what is actually have to do with this incoming request.
+            - server is running at 5000 port
+            - now request is coming to index file where all api routes is defined separately in routes directory that we created earlier in user-routes.js where we assign different-different controller to different end point here `register`.
+            -now import (named import) `router` from `user-router` in routes directory as `const { router } = require("./routes/user-routes");`
+            -now just after the middle ware use we transfer all incoming request to the router as `app.use("/api", router);`
+            -now we define create user-routes.js
+                const express = require("express");
+                const {
+                    register
+                    } = require("../controllers/user-controller"); // getting controller function
+                const router = express.Router();
+
+                router.post("/register", register); // first parameter is end point and second parameter is controller function
+                module.exports = { router }; // do named export so thats why we were able to import in index.js
+            -now we define our controller that is called by router it gets model(schema) and data form api request that is coming through api request
+            -as side by side we wrap the server listen method to execute after the connection of mongodb
+                mongoose
+                .connect(
+                    `mongodb+srv://krishankanhaya:mypassword@users.tmuhp0y.mongodb.net/?retryWrites=true&w=majority`
+                )
+                .then(() => {
+                    app.listen(5000, () => {
+                    console.log("Database is connected and. App is listening on 5000");
+                    });
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+
+            - now two things only we have to do :  make model(schema) in `models/user.js` and controller that takes model and insert data into model that we get through api call
+
+            - first we define schema for models and export it:
+                const mongoose = require("mongoose");
+                const Schema = mongoose.Schema;
+
+                const userSchema = new Schema({
+                name: {
+                    type: String,
+                    required: true,
+                },
+                email: {
+                    type: String,
+                    required: true,
+                    unique: true,
+                }
+                });
+
+                module.exports = mongoose.model("User", userSchema); // in atlas `User` become plural and lowercase `users` that is collection and multiple collection can exist in same cluster that we created earlier on atlas
+
+            - in the last we define controller for register route and export it as :
+                const User = require("../models/user");
+
+                const register = async (req, res, next) => {
+                let existingUser;
+                const { name, email } = req.body;
+                try {
+                    existingUser = await User.findOne({ email: email });
+                } catch (error) {
+                    console.log(error);
+                }
+
+                if (existingUser) {
+                    return res.status(409).json({ message: "User already exists" });
+                }
+
+                const user = new User({
+                    name,
+                    email
+                });
+
+                try {
+                    await user.save();
+                } catch (error) {
+                    console.log(error);
+                }
+
+                return res.status(201).json({ message: user });
+                };
+
+                module.exports = {register};
+    <--- Back-end complete --->
+
+
+
+
     
 
                  

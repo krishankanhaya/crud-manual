@@ -14,7 +14,7 @@ app.use("/api", router);
 
 mongoose
   .connect(
-    `mongodb+srv://krishankanhaya:krishankanhaya@ecom.yo4ikvv.mongodb.net/?retryWrites=true&w=majority`
+    `mongodb+srv://krishankanhaya:mypassword@ecom.yo4ikvv.mongodb.net/?retryWrites=true&w=majority`
   )
   .then(() => {
     app.listen(5000, () => {
